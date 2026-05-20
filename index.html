@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essanza - Minimalist Digital Experiences</title>
+    <!-- Fonts: Outfit for clean, modern sans-serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icon library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+:root {
+    --bg-color: #f4f5f5;
+    --text-dark: #121212;
+    --text-light: #666;
+    --red: #e60000;
+    --white: #ffffff;
+    --dark-section: #111111;
+    --border-color: #e0e0e0;
+    
+    --font-main: 'Outfit', sans-serif;
+    
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 32px;
+    --spacing-lg: 64px;
+    --spacing-xl: 120px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.rounded {
+    border-radius: 100px;
+}
+
+.red-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--red);
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.section-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-heading {
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 400;
+    max-width: 800px;
+}
+
+.section-heading strong {
+    font-weight: 600;
+}
+
+.small-heading {
+    font-size: 28px;
+}
+.small-heading span {
+    font-size: 16px;
+    color: var(--text-light);
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-weight: 400;
+    max-width: 500px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--text-dark);
+    color: var(--white);
+    padding: 12px 24px;
+    border: none;
+    font-family: var(--font-main);
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--red);
+}
+
+.btn-white {
+    background-color: var(--white);
+    color: var(--text-dark);
+    padding: 12px 24px;
+    border: none;
+    font-family: var(--font-main);
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.btn-dark {
+    background-color: var(--dark-section);
+    color: var(--white);
+    padding: 12px 24px;
+    border: none;
+    font-family: var(--font-main);
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.nav-logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 12px 32px;
+    border-radius: 100px;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--red);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 120px 48px 48px 48px;
+    overflow: hidden;
+    margin: 24px;
+    border-radius: 32px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+}
+
+/* Add a gradient overlay to the hero to make text readable and blend into background */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(244,245,245,1) 0%, rgba(244,245,245,0) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-top-elements {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.freelance-badge {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+}
+
+.red-box {
+    background-color: var(--red);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.freelance-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+.freelance-text strong {
+    font-weight: 600;
+}
+.freelance-text span {
+    color: var(--text-light);
+}
+
+.hero-weather {
+    display: flex;
+    gap: 24px;
+    text-align: right;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.hero-quote {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: var(--white);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.author-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+}
+
+.hero-title {
+    font-size: 18vw;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.05em;
+    line-height: 0.8;
+    color: var(--white);
+    margin-bottom: -5%; /* Cut off effect at the bottom */
+    text-transform: capitalize;
+}
+
+/* Social Bar */
+.social-bar {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--border-color);
+    margin: 0 48px;
+}
+
+.social-bar a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: color 0.3s;
+}
+
+.social-bar a:hover {
+    color: var(--red);
+}
+
+.social-bar i {
+    width: 18px;
+    height: 18px;
+}
+
+/* Sections General */
+section {
+    padding: var(--spacing-xl) 48px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Selected Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.project-card {
+    cursor: pointer;
+}
+
+.project-card .img-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.project-card img {
+    width: 100%;
+    height: 300px; /* adjusted to match aspect ratio */
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.tag {
+    font-size: 12px;
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    padding: 4px 12px;
+    border-radius: 100px;
+}
+
+.m-bottom-large {
+    margin-bottom: var(--spacing-lg);
+}
+.m-top-large {
+    margin-top: var(--spacing-lg);
+}
+.center-btn {
+    text-align: center;
+}
+
+/* Timeline / Bento Grid */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.bento-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.bento-award {
+    background: #fdfdfd;
+    border: 1px solid var(--border-color);
+}
+
+.award-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.trophy-icon {
+    background: #fff9e6;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.bento-award h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.bento-award p {
+    color: var(--text-light);
+    margin-bottom: 32px;
+}
+
+.award-tags {
+    display: flex;
+    gap: 12px;
+}
+
+.badge {
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge.dark {
+    background: var(--text-dark);
+    color: var(--white);
+}
+
+.badge.dark-outline {
+    border: 1px solid var(--border-color);
+}
+
+.badge img {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.bento-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.bento-stats {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stat-item h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.stat-item p {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+.link-arrow {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bento-ux {
+    padding: 0;
+}
+.bento-ux .ux-text {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    font-weight: 600;
+    font-size: 16px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 16px;
+}
+
+.bento-ux img {
+    height: 100%;
+    width: 100%;
+}
+
+.bento-right {
+    padding: 0;
+}
+
+.bento-right .bg-img {
+    height: 100%;
+    width: 100%;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 500;
+    max-width: 300px;
+    line-height: 1.4;
+}
+
+/* Services Dark Mode */
+.services-section {
+    background-color: var(--dark-section);
+    color: var(--white);
+    margin: 0 24px;
+    border-radius: 32px;
+}
+
+.services-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-label.white {
+    color: var(--white);
+}
+
+.services-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.services-heading {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-item {
+    display: grid;
+    grid-template-columns: 50px 200px 1fr 200px;
+    gap: 32px;
+    padding: 48px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    align-items: center;
+}
+
+.service-number {
+    color: var(--red);
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.service-title {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.service-content p {
+    color: #999;
+    font-size: 14px;
+    max-width: 400px;
+    margin-bottom: 16px;
+}
+
+.service-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.service-tags span {
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.service-img {
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.service-img img {
+    height: 100%;
+    width: 100%;
+}
+
+/* Case Studies */
+.case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.case-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.case-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 24px;
+}
+
+.case-card img {
+    border-radius: 12px;
+    margin-top: 16px;
+}
+
+.case-card.small img {
+    height: 150px;
+}
+
+.case-card.large img {
+    height: 400px;
+}
+
+.case-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.case-desc {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 12px;
+}
+
+/* FAQ Section */
+.faq-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+}
+
+.faq-heading {
+    font-size: 32px;
+    margin-bottom: 48px;
+    line-height: 1.2;
+}
+
+.faq-img {
+    border-radius: 24px;
+    height: 300px;
+}
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.accordion-item {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-header {
+    width: 100%;
+    text-align: left;
+    padding: 24px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.accordion-content {
+    padding: 0 24px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: var(--text-light);
+    font-size: 15px;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 0 24px 24px 24px;
+    max-height: 200px;
+}
+
+/* Footer */
+.footer {
+    background: var(--dark-section);
+    color: var(--white);
+    padding: var(--spacing-xl) 48px 24px 48px;
+    position: relative;
+    margin-top: 100px;
+}
+
+.footer-huge-text {
+    font-size: 20vw;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.05em;
+    line-height: 0.8;
+    color: var(--white);
+    position: absolute;
+    top: -8vw;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10vw;
+    margin-bottom: var(--spacing-xl);
+}
+
+.footer-cta {
+    max-width: 400px;
+}
+
+.cta-heading {
+    font-size: 28px;
+    margin-bottom: 32px;
+}
+
+.email-form {
+    display: flex;
+    gap: 12px;
+    background: var(--white);
+    padding: 8px;
+    border-radius: 100px;
+}
+
+.email-form input {
+    flex: 1;
+    border: none;
+    background: none;
+    padding-left: 16px;
+    font-family: var(--font-main);
+    font-size: 14px;
+    outline: none;
+}
+
+.submit-btn {
+    padding: 12px;
+    background: var(--red);
+    color: var(--white);
+}
+
+.submit-btn:hover {
+    background: #cc0000;
+}
+
+.footer-links {
+    display: flex;
+    gap: 64px;
+}
+
+.link-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.link-column h4 {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.link-column a {
+    font-size: 14px;
+    color: var(--white);
+    transition: color 0.3s;
+}
+
+.link-column a:hover {
+    color: var(--red);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px;
+    font-size: 12px;
+    color: #999;
+}
+
+.bottom-links {
+    display: flex;
+    gap: 24px;
+}
+
+/* Animations */
+.animate-on-scroll {
+    opacity: 0;
+    filter: blur(12px);
+    will-change: opacity, transform, filter;
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in {
+    transform: translateY(0);
+}
+
+.fade-in-up {
+    transform: translateY(60px);
+}
+
+.fade-in-left {
+    transform: translateX(-50px);
+}
+
+.fade-in-right {
+    transform: translateX(50px);
+}
+
+.scale-in {
+    transform: scale(0.9);
+}
+
+.is-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0) scale(1);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    .service-item {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .case-grid {
+        grid-template-columns: 1fr;
+    }
+    .faq-container {
+        grid-template-columns: 1fr;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 64px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">Essanza</div>
+        <div class="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+        </div>
+        <button class="btn-primary rounded">Let's Talk <i data-lucide="arrow-up-right"></i></button>
+    </nav>
+
+    <header class="hero animate-on-scroll fade-in">
+        <div class="hero-bg animate-on-scroll fade-in-up">
+            <img src="assets/images/hero.png" alt="Hero background">
+        </div>
+        <div class="hero-content">
+            <div class="hero-top-elements animate-on-scroll fade-in-up delay-100">
+                <div class="freelance-badge">
+                    <div class="avatar">
+                        <!-- Tiny avatar placeholder, using the same image or a generic shape -->
+                        <div class="red-box">
+                            <i data-lucide="zap" style="color:white; width:12px; height:12px;"></i>
+                        </div>
+                    </div>
+                    <div class="freelance-text">
+                        <strong>Available</strong>
+                        <span>Freelance projects worldwide</span>
+                    </div>
+                </div>
+                <div class="hero-weather">
+                    <div class="location">Paris<br>France</div>
+                    <div class="time">09:30<br>AM</div>
+                    <div class="temp">21°<br>C</div>
+                </div>
+            </div>
+
+            <div class="hero-quote animate-on-scroll fade-in-up delay-200">
+                <p>Bringing ideas to life through thoughtful design, blending<br>functionality and aesthetics for optimal user experiences.</p>
+                <div class="author">
+                    <img src="assets/images/hero.png" alt="Author" class="author-img">
+                    <span>Maria Fernandes</span>
+                </div>
+            </div>
+
+            <h1 class="hero-title animate-on-scroll fade-in-up delay-300">Essanza</h1>
+        </div>
+    </header>
+
+    <section class="social-bar animate-on-scroll fade-in-up">
+        <a href="#"><i data-lucide="facebook"></i> Facebook</a>
+        <a href="#"><i data-lucide="instagram"></i> Instagram</a>
+        <a href="#"><i data-lucide="linkedin"></i> LinkedIn</a>
+        <a href="#"><i data-lucide="dribbble"></i> Dribbble</a>
+        <a href="#"><i data-lucide="behance"></i> Behance</a>
+    </section>
+
+    <section class="selected-projects" id="projects">
+        <div class="section-header animate-on-scroll fade-in-up">
+            <div class="section-label">
+                <span class="red-dot"></span> Selected projects
+            </div>
+            <h2 class="section-heading">
+                Every project is a dialogue between <strong>design and purpose</strong>, turning vision into meaningful digital experiences.
+            </h2>
+        </div>
+        <button class="btn-primary rounded m-bottom-large">See All Projects <i data-lucide="arrow-right"></i></button>
+
+        <div class="projects-grid">
+            <div class="project-card animate-on-scroll fade-in-up">
+                <div class="img-wrapper">
+                    <img src="assets/images/summer_style.png" alt="Summer Style">
+                </div>
+                <div class="card-footer">
+                    <span>Summer Style Guide Campaign</span>
+                    <span class="tag">Fashion</span>
+                </div>
+            </div>
+            <div class="project-card animate-on-scroll fade-in-up delay-100">
+                <div class="img-wrapper">
+                    <img src="assets/images/car_concept.png" alt="Future Travel">
+                </div>
+                <div class="card-footer">
+                    <span>The Future of Travel</span>
+                    <span class="tag">Automotive</span>
+                </div>
+            </div>
+            <div class="project-card animate-on-scroll fade-in-up delay-200">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=800&auto=format&fit=crop" alt="Beauty App">
+                </div>
+                <div class="card-footer">
+                    <span>Beauty App UX & Design</span>
+                    <span class="tag">Mobile App</span>
+                </div>
+            </div>
+            <div class="project-card animate-on-scroll fade-in-up delay-300">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Portfolio">
+                </div>
+                <div class="card-footer">
+                    <span>Personal Portfolio Website</span>
+                    <span class="tag">Web Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section" id="about">
+        <div class="section-header animate-on-scroll fade-in-up">
+            <div class="section-label">
+                <span class="red-dot"></span> Work Timeline
+            </div>
+            <h2 class="section-heading small-heading">
+                <strong>Designs recognized</strong> beyond boundaries.<br>
+                <span>Collaborating with brands to build outstanding experiences across products, interfaces, and identities.</span>
+            </h2>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-left">
+                <div class="bento-card bento-award animate-on-scroll fade-in-left">
+                    <div class="award-header">
+                        <div class="trophy-icon">🏆</div>
+                        <i data-lucide="arrow-up-right"></i>
+                    </div>
+                    <h3>Agency of the Year 2024</h3>
+                    <p>Honored for our work in digital product design, aesthetics, pushing boundaries in user experiences and creating solutions.</p>
+                    <div class="award-tags">
+                        <span class="badge dark">See Winning Project</span>
+                        <span class="badge dark-outline"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=30" alt=""> Our Team in Action</span>
+                    </div>
+                </div>
+                <div class="bento-row">
+                    <div class="bento-card bento-stats animate-on-scroll fade-in-up">
+                        <div class="stat-item">
+                            <h4>Over 50+ Brands</h4>
+                            <p>Helping startups to global corps with design transformations.</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>$5M+ Funded</h4>
+                            <p>For startups we've helped building from the ground up.</p>
+                        </div>
+                        <a href="#" class="link-arrow">View All Clients <i data-lucide="arrow-right"></i></a>
+                    </div>
+                    <div class="bento-card bento-ux animate-on-scroll fade-in-up delay-100">
+                        <div class="ux-text">2023 UX / UI Award<br>Mobile App Design</div>
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&auto=format&fit=crop" alt="Abstract">
+                    </div>
+                </div>
+            </div>
+            <div class="bento-right bento-card animate-on-scroll fade-in-right delay-200">
+                <img src="https://images.unsplash.com/photo-1615813967515-e1838c1c5116?q=80&w=800&auto=format&fit=crop" class="bg-img" alt="Dreamy Portrait">
+                <div class="overlay-text">
+                    A unified blend of aesthetics and logic,<br>translating complex goals into beautiful digital journeys.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section dark-mode" id="services">
+        <div class="services-header animate-on-scroll fade-in-up">
+            <div class="section-label white">
+                <span class="red-dot"></span> Services
+            </div>
+            <div class="services-title-row">
+                <h2 class="services-heading">
+                    Minimalist, functional, and timeless<br>
+                    <strong>digital experiences</strong> crafted with precision.
+                </h2>
+                <button class="btn-white rounded">Let's Connect <i data-lucide="arrow-up-right"></i></button>
+            </div>
+        </div>
+
+        <div class="services-list">
+            <div class="service-item animate-on-scroll fade-in-left">
+                <div class="service-number">01</div>
+                <div class="service-title">Social Media</div>
+                <div class="service-content">
+                    <p>Building comprehensive and highly effective campaigns, designing engaging visual content and establishing a unique tone of voice.</p>
+                    <div class="service-tags">
+                        <span>Content Strategy</span>
+                        <span>Copywriting</span>
+                        <span>Design</span>
+                        <span>SEO Basics</span>
+                        <span>Brand Identity</span>
+                    </div>
+                </div>
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&auto=format&fit=crop" alt="Social Media">
+                </div>
+            </div>
+            
+            <div class="service-item animate-on-scroll fade-in-left">
+                <div class="service-number">02</div>
+                <div class="service-title">Branding</div>
+                <div class="service-content">
+                    <p>Developing unique visual identities and brand manuals. Crafting comprehensive branding strategies from concept to launch.</p>
+                    <div class="service-tags">
+                        <span>Logo Design</span>
+                        <span>Typography</span>
+                        <span>Color Palette</span>
+                        <span>Brand Voice</span>
+                    </div>
+                </div>
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=300&auto=format&fit=crop" alt="Branding">
+                </div>
+            </div>
+
+            <div class="service-item animate-on-scroll fade-in-left">
+                <div class="service-number">03</div>
+                <div class="service-title">UX/UI Design</div>
+                <div class="service-content">
+                    <p>Designing intuitive interfaces for digital products. User research, wireframing, and interactive prototypes for optimal user flows.</p>
+                    <div class="service-tags">
+                        <span>Wireframes</span>
+                        <span>Prototyping</span>
+                        <span>Testing</span>
+                        <span>Design Systems</span>
+                    </div>
+                </div>
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&auto=format&fit=crop" alt="UX/UI">
+                </div>
+            </div>
+
+            <div class="service-item animate-on-scroll fade-in-left">
+                <div class="service-number">04</div>
+                <div class="service-title">Creative Direction</div>
+                <div class="service-content">
+                    <p>Guiding the visual strategies and overall aesthetics of brand identities, campaigns, and digital products for seamless consistency.</p>
+                    <div class="service-tags">
+                        <span>Art Direction</span>
+                        <span>Photography</span>
+                        <span>Campaigns</span>
+                        <span>Video Production</span>
+                    </div>
+                </div>
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&auto=format&fit=crop" alt="Creative Direction">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="case-studies">
+        <div class="case-header">
+            <div class="section-label">
+                <span class="red-dot"></span> Selected Work
+            </div>
+            <h2 class="case-heading">
+                A curated collection of projects, across web, identity, and visual design — minimalist yet purposeful.
+            </h2>
+        </div>
+
+        <div class="case-grid">
+            <div class="case-col side-col">
+                <div class="case-card small animate-on-scroll fade-in-up">
+                    <div class="case-label"><span class="red-dot"></span> Visual Identity <span class="tag">Case Study</span></div>
+                    <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=600&auto=format&fit=crop" alt="">
+                </div>
+                <div class="case-card small animate-on-scroll fade-in-up">
+                    <div class="case-label"><span class="red-dot"></span> Digital Product UI <span class="tag">Case Study</span></div>
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop" alt="">
+                </div>
+            </div>
+            <div class="case-col center-col">
+                <div class="case-card large animate-on-scroll fade-in-up delay-100">
+                    <div class="case-label">
+                        <strong>Essanza Portfolio</strong>
+                        <i data-lucide="arrow-up-right" style="color:var(--red);"></i>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop" alt="">
+                    <div class="case-desc">A complete visual overhaul and digital presence revamp.</div>
+                </div>
+            </div>
+            <div class="case-col side-col">
+                <div class="case-card small animate-on-scroll fade-in-up">
+                    <div class="case-label"><span class="red-dot"></span> Creative Campaign <span class="tag">Branding</span></div>
+                    <img src="https://images.unsplash.com/photo-1516575334481-f85287c2c82d?q=80&w=600&auto=format&fit=crop" alt="">
+                </div>
+                <div class="case-card small animate-on-scroll fade-in-up">
+                    <div class="case-label"><span class="red-dot"></span> Experimental Layouts <span class="tag">Editorial</span></div>
+                    <img src="https://images.unsplash.com/photo-1620288627223-53302f4e8c74?q=80&w=600&auto=format&fit=crop" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="center-btn m-top-large">
+            <button class="btn-dark rounded">Load More <i data-lucide="arrow-down"></i></button>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="faq-left animate-on-scroll fade-in-left">
+                <div class="section-label">
+                    <span class="red-dot"></span> Frequently asked questions
+                </div>
+                <h2 class="faq-heading">
+                    Concise explanations to guide through how I work, the tools I use, and what you can expect.
+                </h2>
+                <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=800&auto=format&fit=crop" alt="Smiling Woman" class="faq-img">
+            </div>
+            <div class="faq-right animate-on-scroll fade-in-right">
+                <div class="accordion">
+                    <div class="accordion-item active">
+                        <button class="accordion-header">
+                            What is the typical project timeline normally like?
+                            <i data-lucide="minus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Typically, projects take between 4 to 8 weeks, depending on the scope and complexity. We emphasize thorough research and conceptualization before jumping into design, ensuring alignment with your strategic goals.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            How do we collaborate on a project with a team?
+                            <i data-lucide="plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>We use tools like Figma, Notion, and Slack to maintain a transparent and asynchronous workflow, adapting to your team's rhythms.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            What is your approach to the overall design process?
+                            <i data-lucide="plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Our process focuses on research-driven insights followed by rapid prototyping and iterative refinement based on feedback.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            How very far away does my project start?
+                            <i data-lucide="plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>We typically book projects 2 to 4 weeks in advance. Reach out early to secure a slot in our timeline.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Do you also handle the development for web and apps?
+                            <i data-lucide="plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Yes, we partner with top-tier development studios to bring our designs to life using modern tech stacks like React, Next.js, and Webflow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h1 class="footer-huge-text">Essanza</h1>
+        <div class="footer-content animate-on-scroll fade-in-up delay-100">
+            <div class="footer-cta">
+                <div class="section-label"><span class="red-dot"></span> Let's work together</div>
+                <h2 class="cta-heading">Start a conversation to bring your projects and ideas to life now.</h2>
+                <div class="email-form">
+                    <input type="email" placeholder="Email Address">
+                    <button class="btn-primary rounded submit-btn"><i data-lucide="arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Quick Links</h4>
+                    <a href="#">Home</a>
+                    <a href="#">Projects</a>
+                    <a href="#">Services</a>
+                    <a href="#">Profile</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="link-column">
+                    <h4>Socials networks</h4>
+                    <a href="#">Dribbble (Essanza)</a>
+                    <a href="#">Instagram (Essanza)</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+            <div class="copyright">
+                © 2024 Essanza Studio
+            </div>
+        </div>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Scroll Animation Logic
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach(el => observer.observe(el));
+
+    // FAQ Accordion Logic
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        
+        header.addEventListener('click', () => {
+            // Check if this item is already active
+            const isActive = item.classList.contains('active');
+            
+            // Close all items
+            accordionItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+                // update icon to plus
+                const icon = otherItem.querySelector('i');
+                if (icon) icon.setAttribute('data-lucide', 'plus');
+            });
+            
+            // If it wasn't active, open it
+            if (!isActive) {
+                item.classList.add('active');
+                const icon = item.querySelector('i');
+                if (icon) icon.setAttribute('data-lucide', 'minus');
+            }
+            
+            // Re-render lucide icons to apply changes
+            lucide.createIcons();
+        });
+    });
+});
+
+</script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
